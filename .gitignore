@@ -96,3 +96,12 @@ public/
 .dynamodb/
 
 # End of https://www.gitignore.io/api/solidity
+
+# Build directory:
+/build
+
+# Buidler cache:
+/cache
+
+# Typechain temporary directory
+/typechain
