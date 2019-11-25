@@ -1,8 +1,11 @@
+import dotenv from "dotenv";
 import { BuidlerConfig, usePlugin } from "@nomiclabs/buidler/config";
-import waffleDefaultAccounts from "ethereum-waffle/dist/config/defaultAccounts";
+import { defaultAccounts } from "./src/utils/wallet-utils";
 
 usePlugin("@nomiclabs/buidler-ethers");
 usePlugin("buidler-typechain");
+
+dotenv.config();
 
 const config: BuidlerConfig = {
   paths: {
@@ -15,10 +18,7 @@ const config: BuidlerConfig = {
   networks: {
     buidlerevm: {
       chainId: 1337,
-      accounts: waffleDefaultAccounts.map(acc => ({
-        balance: acc.balance,
-        privateKey: acc.secretKey,
-      })),
+      accounts: defaultAccounts(),
     },
   },
   typechain: {

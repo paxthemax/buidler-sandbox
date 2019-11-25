@@ -1,6 +1,8 @@
 import { ethers } from "@nomiclabs/buidler";
-import { deployContract, getWallets, solidity } from "ethereum-waffle";
+import { deployContract, solidity } from "ethereum-waffle";
 import chai from "chai";
+
+import { defaultWallets } from "../src/utils/wallet-utils";
 
 import CounterArtifact from "../build/artefacts/Counter.json";
 import { Counter } from "../build/typechain/Counter";
@@ -9,14 +11,12 @@ chai.use(solidity);
 const { expect } = chai;
 
 describe("Testing counter contract", () => {
-  const provider = ethers.provider;
-  const [wallet] = getWallets(provider);
-
+  const [ root, other ] = defaultWallets(ethers.provider);
   let counter: Counter;
 
   describe("When deploying counter contract", async () => {
     before("deploy contract", async () => {
-      counter = await deployContract(wallet, CounterArtifact) as Counter;
+      counter = await deployContract(root, CounterArtifact) as Counter;
     });
 
     it("should deploy to a proper address", async () => {
@@ -30,7 +30,7 @@ describe("Testing counter contract", () => {
 
   describe("With counter contract deployed", async () => {
     beforeEach(async () => {
-      counter = await deployContract(wallet, CounterArtifact) as Counter;
+      counter = await deployContract(root, CounterArtifact) as Counter;
     });
 
     describe("when testing `countUp()`", () => {
@@ -39,7 +39,7 @@ describe("Testing counter contract", () => {
       });
 
       it("should increment counter", async () => {
-        await counter.countUp();
+        await counter.connect(other).countUp();
         expect(await counter.getCount()).to.be.equal(1);
       });
     });
