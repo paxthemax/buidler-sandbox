@@ -70,7 +70,7 @@ export function generateWallets(count:number, mnemonic:string, provider:Provider
  * @param provider Instance of an ethers Provider.
  * @returns An array of wallet instances.
  */
-export function defaultWallets(provider:Provider) {
+export function defaultWallets(provider:Provider) : Wallet[] {
   return generateWallets(DEFAULT_ACCOUNT_CNT, getMnemonic(), provider);
 }
 

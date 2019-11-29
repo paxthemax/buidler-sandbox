@@ -5,6 +5,8 @@ import { defaultAccounts } from "./src/utils/wallet-utils";
 usePlugin("@nomiclabs/buidler-ethers");
 usePlugin("buidler-typechain");
 
+import "./tasks/accounts";
+
 dotenv.config();
 
 const config: BuidlerConfig = {
