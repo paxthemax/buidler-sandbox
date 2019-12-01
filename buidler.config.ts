@@ -3,6 +3,7 @@ import { BuidlerConfig, usePlugin } from "@nomiclabs/buidler/config";
 import { defaultAccounts } from "./src/utils/wallet-utils";
 
 usePlugin("@nomiclabs/buidler-ethers");
+usePlugin("@nomiclabs/buidler-solhint");
 usePlugin("buidler-typechain");
 
 import "./tasks/accounts";
